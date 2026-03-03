@@ -1,0 +1,134 @@
+<div class="card post-card">
+  <!-- Post Header -->
+  <div class="post-header">
+    <div class="post-author">
+      <div class="author-avatar">{{ (authorName || 'U').charAt(0).toUpperCase() }}</div>
+      <div>
+        <a [routerLink]="['/profile', post.authorId]" class="author-name">{{ authorName || 'Unknown' }}</a>
+        <div class="post-meta">
+          <span class="post-time">{{ formatDate(post.createdAt) }}</span>
+          <span class="post-type-badge" *ngIf="post.postType !== 'REGULAR'">{{ post.postType }}</span>
+          <span class="pinned-badge" *ngIf="post.isPinned">📌 Pinned</span>
+        </div>
+        <div *ngIf="post.isShared" class="shared-badge">
+          🔄 Shared from <a [routerLink]="['/profile', post.originalPostId]">{{ originalAuthorName || 'Original Post' }}</a>
+        </div>
+      </div>
+    </div>
+    <div class="post-menu">
+      <button *ngIf="canEditPost() && !post.isPinned" (click)="pinPost()" class="btn-pin" title="Pin to Profile">📌</button>
+      <button *ngIf="canEditPost() && post.isPinned" (click)="unpinPost()" class="btn-pin active" title="Unpin">📌</button>
+      <button *ngIf="canEditPost() && !isEditing" (click)="startEdit()" class="btn-edit" title="Edit">✏️</button>
+      <button *ngIf="canDeletePost()" (click)="deletePost()" class="btn-delete" title="Delete">×</button>
+    </div>
+  </div>
+
+  <!-- Post Content -->
+  <div class="post-content" *ngIf="!isEditing">
+    {{ post.content }}
+    
+    <!-- Media Display -->
+    <div *ngIf="post.mediaPath" class="post-media">
+      <!-- Image -->
+      <img
+        *ngIf="isImage(post.mediaPath)"
+        [src]="getMediaUrl(post.mediaPath)"
+        alt="Post media"
+        class="post-image"
+        (error)="onMediaError($event)"
+      />
+      
+      <!-- Video -->
+      <video
+        *ngIf="isVideo(post.mediaPath)"
+        [src]="getMediaUrl(post.mediaPath)"
+        controls
+        class="post-video"
+        (error)="onMediaError($event)"
+      >
+        Your browser does not support the video tag.
+      </video>
+      
+      <!-- File/Document -->
+      <div *ngIf="isDocument(post.mediaPath)" class="post-document">
+        <div class="document-icon">📄</div>
+        <div class="document-info">
+          <span class="document-name">{{ getFileName(post.mediaPath) }}</span>
+          <a [href]="getMediaUrl(post.mediaPath)" target="_blank" class="btn btn-sm btn-secondary">
+            Download
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Call to Action Button -->
+    <div *ngIf="post.callToAction" class="cta-section">
+      <button class="cta-button">
+        {{ getCallToActionText() }} →
+      </button>
+    </div>
+  </div>
+  
+  <!-- Edit Mode -->
+  <div class="post-edit" *ngIf="isEditing">
+    <textarea
+      class="form-control"
+      [(ngModel)]="editedContent"
+      rows="3"
+      placeholder="Edit your post..."
+    ></textarea>
+    <div class="edit-actions">
+      <button (click)="saveEdit()" class="btn btn-primary btn-sm">Save</button>
+      <button (click)="cancelEdit()" class="btn btn-secondary btn-sm">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Post Actions -->
+  <div class="post-actions">
+    <button (click)="toggleLike()" class="action-btn" [class.liked]="isLiked">
+      <span>{{ isLiked ? '❤️' : '🤍' }}</span>
+      <span>{{ likeCount }} {{ likeCount === 1 ? 'Like' : 'Likes' }}</span>
+    </button>
+    <button (click)="toggleComments()" class="action-btn">
+      <span>💬</span>
+      <span>{{ commentCount }} {{ commentCount === 1 ? 'Comment' : 'Comments' }}</span>
+    </button>
+    <button (click)="sharePost()" class="action-btn">
+      <span>🔄</span>
+      <span>Share</span>
+    </button>
+  </div>
+
+  <!-- Comments Section -->
+  <div *ngIf="showComments" class="comments-section">
+    <div class="comment-input">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Write a comment..."
+        [(ngModel)]="newCommentContent"
+        (keyup.enter)="addComment()"
+      />
+      <button (click)="addComment()" class="btn btn-primary btn-sm">Post</button>
+    </div>
+
+    <div class="comments-list">
+      <div *ngFor="let comment of comments" class="comment">
+        <div class="comment-header">
+          <a [routerLink]="['/profile', comment.userId]" class="comment-author">
+            {{ comment.userName || 'Unknown' }}
+          </a>
+          <span class="comment-time">{{ formatDate(comment.createdAt) }}</span>
+          <button *ngIf="canDeleteComment(comment)" (click)="deleteComment(comment.id)" class="btn-delete-comment">
+            ×
+          </button>
+        </div>
+        <div class="comment-content">{{ comment.content }}</div>
+      </div>
+
+      <div *ngIf="comments.length === 0" class="no-comments">
+        No comments yet. Be the first to comment!
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+/* ========================================
+   RESPONSIVE ANALYTICS
+   ======================================== */
+
+/* Mobile devices (320px - 480px) */
+@media (max-width: 480px) {
+  .analytics-layout {
+    max-width: 100%;
+    margin: 10px;
+    padding: 0 10px;
+  }
+
+  .page-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .metric-card {
+    padding: 15px;
+  }
+
+  .metric-icon {
+    font-size: 28px;
+  }
+
+  .metric-value {
+    font-size: 28px;
+  }
+
+  .metric-label {
+    font-size: 13px;
+  }
+
+  .demographics-content {
+    padding: 15px;
+  }
+
+  .post-selector {
+    padding: 15px;
+  }
+
+  .post-analytics-details {
+    padding: 15px;
+  }
+
+  .analytics-metrics {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .analytics-metric {
+    padding: 12px;
+  }
+
+  .engagement-section {
+    padding: 15px;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .analytics-layout {
+    max-width: 100%;
+    margin: 15px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .analytics-metrics {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop (769px and above) */
+@media (min-width: 769px) {
+  .analytics-layout {
+    max-width: 1000px;
+    margin: 20px auto;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .analytics-metrics {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

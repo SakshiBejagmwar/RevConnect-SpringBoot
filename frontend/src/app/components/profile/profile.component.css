@@ -1,0 +1,284 @@
+.profile-layout {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.profile-card {
+  padding: 30px;
+}
+
+.profile-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e4e6eb;
+}
+
+.profile-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 48px;
+}
+
+.profile-info h1 {
+  margin: 0 0 5px 0;
+  font-size: 28px;
+}
+
+.profile-email {
+  color: #65676b;
+  margin: 5px 0;
+}
+
+.profile-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: #e7f3ff;
+  color: #1877f2;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e4e6eb;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #050505;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #65676b;
+}
+
+.profile-details {
+  margin-bottom: 30px;
+}
+
+.detail-item {
+  margin-bottom: 20px;
+}
+
+.detail-item strong {
+  display: block;
+  margin-bottom: 5px;
+  color: #050505;
+}
+
+.detail-item p {
+  margin: 0;
+  color: #65676b;
+}
+
+.detail-item a {
+  color: #1877f2;
+  text-decoration: none;
+}
+
+.detail-item a:hover {
+  text-decoration: underline;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* ========================================
+   RESPONSIVE PROFILE
+   ======================================== */
+
+/* Mobile devices (320px - 480px) */
+@media (max-width: 480px) {
+  .profile-layout {
+    max-width: 100%;
+    margin: 10px;
+  }
+
+  .profile-card {
+    padding: 20px 15px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+  }
+
+  .profile-info h1 {
+    font-size: 22px;
+  }
+
+  .profile-email {
+    font-size: 13px;
+  }
+
+  .profile-badge {
+    padding: 3px 10px;
+    font-size: 11px;
+    margin-right: 6px;
+    margin-top: 6px;
+  }
+
+  .profile-stats {
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-around;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+  }
+
+  .stat {
+    min-width: 80px;
+  }
+
+  .stat-value {
+    font-size: 20px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
+  .profile-details {
+    margin-bottom: 20px;
+  }
+
+  .detail-item {
+    margin-bottom: 15px;
+  }
+
+  .detail-item strong {
+    font-size: 13px;
+  }
+
+  .detail-item p {
+    font-size: 13px;
+  }
+
+  .profile-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .profile-actions .btn {
+    width: 100%;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .profile-layout {
+    max-width: 100%;
+    margin: 15px;
+  }
+
+  .profile-card {
+    padding: 25px 20px;
+  }
+
+  .profile-header {
+    gap: 18px;
+    margin-bottom: 25px;
+  }
+
+  .profile-avatar {
+    width: 90px;
+    height: 90px;
+    font-size: 44px;
+  }
+
+  .profile-info h1 {
+    font-size: 24px;
+  }
+
+  .profile-stats {
+    gap: 30px;
+    margin-bottom: 25px;
+  }
+
+  .stat-value {
+    font-size: 22px;
+  }
+
+  .profile-actions {
+    flex-wrap: wrap;
+  }
+}
+
+/* Desktop (769px and above) */
+@media (min-width: 769px) {
+  .profile-layout {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+
+  .profile-card {
+    padding: 30px;
+  }
+
+  .profile-header {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .profile-actions {
+    flex-direction: row;
+  }
+
+  .profile-actions .btn {
+    width: auto;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .profile-stats {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .stat {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .stat-label {
+    order: -1;
+  }
+}

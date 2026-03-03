@@ -1,0 +1,151 @@
+<div class="container">
+  <div class="analytics-layout">
+    <h1 class="page-title">Analytics Dashboard</h1>
+
+    <!-- Overall Metrics -->
+    <div class="card metrics-overview">
+      <h2 class="card-header">Overall Performance</h2>
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon">👥</div>
+          <div class="metric-value">{{ totalFollowers }}</div>
+          <div class="metric-label">Total Followers</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">❤️</div>
+          <div class="metric-value">{{ totalLikes }}</div>
+          <div class="metric-label">Total Likes</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">💬</div>
+          <div class="metric-value">{{ totalComments }}</div>
+          <div class="metric-label">Total Comments</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon">🔄</div>
+          <div class="metric-value">{{ totalShares }}</div>
+          <div class="metric-label">Total Shares</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Follower Demographics -->
+    <div class="card demographics-section">
+      <h2 class="card-header">Follower Demographics</h2>
+      <div class="demographics-content">
+        <div class="demographic-item">
+          <div class="demographic-label">
+            <span class="role-badge personal">Personal Users</span>
+          </div>
+          <div class="demographic-bar">
+            <div class="bar-fill personal" [style.width.%]="getFollowerPercentage('USER')"></div>
+          </div>
+          <div class="demographic-value">
+            {{ followersByRole.USER }} ({{ getFollowerPercentage('USER') }}%)
+          </div>
+        </div>
+
+        <div class="demographic-item">
+          <div class="demographic-label">
+            <span class="role-badge creator">Creators</span>
+          </div>
+          <div class="demographic-bar">
+            <div class="bar-fill creator" [style.width.%]="getFollowerPercentage('CREATOR')"></div>
+          </div>
+          <div class="demographic-value">
+            {{ followersByRole.CREATOR }} ({{ getFollowerPercentage('CREATOR') }}%)
+          </div>
+        </div>
+
+        <div class="demographic-item">
+          <div class="demographic-label">
+            <span class="role-badge business">Business</span>
+          </div>
+          <div class="demographic-bar">
+            <div class="bar-fill business" [style.width.%]="getFollowerPercentage('BUSINESS')"></div>
+          </div>
+          <div class="demographic-value">
+            {{ followersByRole.BUSINESS }} ({{ getFollowerPercentage('BUSINESS') }}%)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post Analytics -->
+    <div class="card post-analytics-section">
+      <h2 class="card-header">Post Analytics</h2>
+      
+      <div class="post-selector">
+        <label>Select a post to view detailed analytics:</label>
+        <select (change)="selectPost(myPosts[$any($event.target).value])" class="form-control">
+          <option value="">-- Select a post --</option>
+          <option *ngFor="let post of myPosts; let i = index" [value]="i">
+            {{ post.content.substring(0, 50) }}{{ post.content.length > 50 ? '...' : '' }}
+          </option>
+        </select>
+      </div>
+
+      <div *ngIf="isLoading" class="text-center">
+        <div class="spinner"></div>
+        <p>Loading analytics...</p>
+      </div>
+
+      <div *ngIf="selectedPost && postAnalytics && !isLoading" class="post-analytics-details">
+        <div class="selected-post-preview">
+          <h3>Selected Post</h3>
+          <p class="post-content">{{ selectedPost.content }}</p>
+          <span class="post-date">Posted: {{ selectedPost.createdAt | date:'medium' }}</span>
+        </div>
+
+        <div class="analytics-metrics">
+          <div class="analytics-metric">
+            <div class="metric-icon">❤️</div>
+            <div class="metric-info">
+              <div class="metric-value">{{ postAnalytics.totalLikes }}</div>
+              <div class="metric-label">Likes</div>
+            </div>
+          </div>
+
+          <div class="analytics-metric">
+            <div class="metric-icon">💬</div>
+            <div class="metric-info">
+              <div class="metric-value">{{ postAnalytics.totalComments }}</div>
+              <div class="metric-label">Comments</div>
+            </div>
+          </div>
+
+          <div class="analytics-metric">
+            <div class="metric-icon">🔄</div>
+            <div class="metric-info">
+              <div class="metric-value">{{ postAnalytics.totalShares }}</div>
+              <div class="metric-label">Shares</div>
+            </div>
+          </div>
+
+          <div class="analytics-metric">
+            <div class="metric-icon">👁️</div>
+            <div class="metric-info">
+              <div class="metric-value">{{ postAnalytics.reach }}</div>
+              <div class="metric-label">Reach (Unique Viewers)</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="engagement-section">
+          <h3>Engagement Rate</h3>
+          <div class="engagement-bar-container">
+            <div class="engagement-bar" [style.width.%]="engagementRate"></div>
+          </div>
+          <p class="engagement-value">{{ engagementRate.toFixed(2) }}%</p>
+          <p class="engagement-description">
+            Engagement rate is calculated as (Likes + Comments + Shares) / Reach × 100
+          </p>
+        </div>
+      </div>
+
+      <div *ngIf="!selectedPost && !isLoading" class="empty-state">
+        <p>Select a post to view detailed analytics</p>
+      </div>
+    </div>
+  </div>
+</div>

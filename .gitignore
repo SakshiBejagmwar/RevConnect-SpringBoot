@@ -1,0 +1,27 @@
+# ===== Backend (Spring Boot / Maven) =====
+backend/target/
+backend/*.log
+backend/**/*.class
+backend/.mvn/
+backend/.gradle/
+backend/build/
+
+# ===== Frontend (Angular / Node) =====
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/coverage/
+frontend/*.log
+
+# ===== IDE / OS =====
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+
+# ===== Secrets =====
+**/.env
+**/.env.*
+**/application-local.properties
+**/application-prod.properties

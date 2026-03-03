@@ -1,0 +1,87 @@
+<div class="container" *ngIf="user">
+  <div class="profile-layout">
+    <div class="card profile-card">
+      <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+      
+      <div class="alert alert-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <div class="profile-avatar">{{ (user.name || 'U').charAt(0).toUpperCase() }}</div>
+        <div class="profile-info">
+          <h1 *ngIf="!isEditing">{{ user.name }}</h1>
+          <input *ngIf="isEditing" type="text" class="form-control" [(ngModel)]="editedUser.name" />
+          
+          <p class="profile-email">{{ user.email }}</p>
+          <span class="profile-badge">{{ user.role }}</span>
+          <span class="profile-badge">{{ user.accountPrivacy }}</span>
+        </div>
+      </div>
+
+      <!-- Profile Stats -->
+      <div class="profile-stats">
+        <div class="stat">
+          <div class="stat-value">{{ followersCount }}</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">{{ followingCount }}</div>
+          <div class="stat-label">Following</div>
+        </div>
+      </div>
+
+      <!-- Profile Details -->
+      <div class="profile-details">
+        <div class="detail-item" *ngIf="user.bio || isEditing">
+          <strong>Bio:</strong>
+          <p *ngIf="!isEditing">{{ user.bio || 'No bio yet' }}</p>
+          <textarea *ngIf="isEditing" class="form-control" [(ngModel)]="editedUser.bio" rows="3"></textarea>
+        </div>
+
+        <div class="detail-item" *ngIf="user.location || isEditing">
+          <strong>Location:</strong>
+          <p *ngIf="!isEditing">{{ user.location || 'Not specified' }}</p>
+          <input *ngIf="isEditing" type="text" class="form-control" [(ngModel)]="editedUser.location" />
+        </div>
+
+        <div class="detail-item" *ngIf="user.website || isEditing">
+          <strong>Website:</strong>
+          <p *ngIf="!isEditing">
+            <a [href]="user.website" target="_blank" *ngIf="user.website">{{ user.website }}</a>
+            <span *ngIf="!user.website">Not specified</span>
+          </p>
+          <input *ngIf="isEditing" type="text" class="form-control" [(ngModel)]="editedUser.website" />
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="profile-actions">
+        <div *ngIf="isOwnProfile">
+          <button *ngIf="!isEditing" (click)="toggleEdit()" class="btn btn-primary">
+            Edit Profile
+          </button>
+          <div *ngIf="isEditing" class="d-flex gap-1">
+            <button (click)="toggleEdit()" class="btn btn-success">Save</button>
+            <button (click)="cancelEdit()" class="btn btn-secondary">Cancel</button>
+          </div>
+        </div>
+
+        <div *ngIf="!isOwnProfile" class="d-flex gap-1">
+          <button *ngIf="user.role === 'USER'" (click)="sendConnectionRequest()" class="btn btn-primary">
+            Connect
+          </button>
+          <button *ngIf="!isFollowing" (click)="followUser()" class="btn btn-primary">
+            Follow
+          </button>
+          <button *ngIf="isFollowing" (click)="unfollowUser()" class="btn btn-secondary">
+            Unfollow
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

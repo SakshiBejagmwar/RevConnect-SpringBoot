@@ -1,0 +1,123 @@
+<div class="container">
+  <div class="notifications-layout">
+    <div class="card">
+      <div class="notifications-header">
+        <h1 class="card-header">Notifications</h1>
+        <div class="header-actions">
+          <span class="unread-badge" *ngIf="unreadCount > 0">{{ unreadCount }} unread</span>
+          <button (click)="markAllAsRead()" class="btn btn-secondary btn-sm" *ngIf="unreadCount > 0">
+            Mark all as read
+          </button>
+          <button (click)="togglePreferences()" class="btn btn-secondary btn-sm">
+            ⚙️ Preferences
+          </button>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button
+          class="tab"
+          [class.active]="activeTab === 'all'"
+          (click)="setActiveTab('all')"
+        >
+          All ({{ notifications.length }})
+        </button>
+        <button
+          class="tab"
+          [class.active]="activeTab === 'unread'"
+          (click)="setActiveTab('unread')"
+        >
+          Unread ({{ unreadCount }})
+        </button>
+      </div>
+
+      <!-- Notification Preferences -->
+      <div *ngIf="showPreferences" class="preferences-panel">
+        <h3>Notification Preferences</h3>
+        <p class="preferences-description">Choose which notifications you want to receive</p>
+        
+        <div class="preference-item">
+          <label>
+            <input type="checkbox" [(ngModel)]="preferences.likeEnabled" />
+            <span>Likes on my posts</span>
+          </label>
+        </div>
+
+        <div class="preference-item">
+          <label>
+            <input type="checkbox" [(ngModel)]="preferences.commentEnabled" />
+            <span>Comments on my posts</span>
+          </label>
+        </div>
+
+        <div class="preference-item">
+          <label>
+            <input type="checkbox" [(ngModel)]="preferences.shareEnabled" />
+            <span>Shares of my posts</span>
+          </label>
+        </div>
+
+        <div class="preference-item">
+          <label>
+            <input type="checkbox" [(ngModel)]="preferences.followEnabled" />
+            <span>New followers</span>
+          </label>
+        </div>
+
+        <div class="preference-item">
+          <label>
+            <input type="checkbox" [(ngModel)]="preferences.followRequestEnabled" />
+            <span>Follow requests</span>
+          </label>
+        </div>
+
+        <div class="preference-item">
+          <label>
+            <input type="checkbox" [(ngModel)]="preferences.connectionRequestEnabled" />
+            <span>Connection requests</span>
+          </label>
+        </div>
+
+        <div class="preference-item">
+          <label>
+            <input type="checkbox" [(ngModel)]="preferences.connectionAcceptedEnabled" />
+            <span>Connection accepted</span>
+          </label>
+        </div>
+
+        <div class="preference-actions">
+          <button (click)="savePreferences()" class="btn btn-primary">Save Preferences</button>
+          <button (click)="togglePreferences()" class="btn btn-secondary">Cancel</button>
+        </div>
+      </div>
+
+      <div *ngIf="isLoading" class="text-center">
+        <div class="spinner"></div>
+        <p>Loading notifications...</p>
+      </div>
+
+      <div *ngIf="!isLoading && filteredNotifications.length === 0" class="empty-state">
+        <p>No notifications yet</p>
+      </div>
+
+      <div *ngIf="!isLoading && filteredNotifications.length > 0" class="notifications-list">
+        <div
+          *ngFor="let notification of filteredNotifications"
+          class="notification-item"
+          [class.unread]="!notification.isRead"
+          (click)="markAsRead(notification)"
+        >
+          <div class="notification-icon">
+            {{ getNotificationIcon(notification.type) }}
+          </div>
+          <div class="notification-content">
+            <p class="notification-message">{{ notification.message }}</p>
+            <span class="notification-time">{{ formatDate(notification.createdAt) }}</span>
+          </div>
+          <div *ngIf="!notification.isRead" class="unread-indicator"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

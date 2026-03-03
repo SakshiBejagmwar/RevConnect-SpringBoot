@@ -1,0 +1,30 @@
+<nav class="navbar" *ngIf="isAuthenticated()">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <a routerLink="/feed">RevConnect</a>
+    </div>
+    
+    <div class="navbar-menu">
+      <a routerLink="/feed" routerLinkActive="active" class="nav-link">
+        <span>🏠</span> Feed
+      </a>
+      <a routerLink="/search" routerLinkActive="active" class="nav-link">
+        <span>🔍</span> Search
+      </a>
+      <a routerLink="/analytics" routerLinkActive="active" class="nav-link">
+        <span>📊</span> Analytics
+      </a>
+      <a routerLink="/connections" routerLinkActive="active" class="nav-link">
+        <span>👥</span> Connections
+      </a>
+      <a routerLink="/notifications" routerLinkActive="active" class="nav-link">
+        <span>🔔</span> Notifications
+        <span class="notification-badge" *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+      </a>
+      <a (click)="navigateToProfile()" class="nav-link" style="cursor: pointer;">
+        <span>👤</span> Profile
+      </a>
+      <button (click)="logout()" class="btn btn-secondary">Logout</button>
+    </div>
+  </div>
+</nav>

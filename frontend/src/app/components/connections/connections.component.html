@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="connections-layout">
+    <div class="card">
+      <h1 class="card-header">Connections & Followers</h1>
+
+      <div class="alert alert-success" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+      
+      <div class="alert alert-error" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button
+          class="tab"
+          [class.active]="activeTab === 'my-connections'"
+          (click)="setActiveTab('my-connections')"
+        >
+          My Connections ({{ myConnectionUsers.length }})
+        </button>
+        <button
+          class="tab"
+          [class.active]="activeTab === 'pending-connections'"
+          (click)="setActiveTab('pending-connections')"
+        >
+          Connection Requests ({{ pendingConnections.length }})
+        </button>
+        <button
+          class="tab"
+          [class.active]="activeTab === 'pending-follows'"
+          (click)="setActiveTab('pending-follows')"
+        >
+          Follow Requests ({{ pendingFollowRequests.length }})
+        </button>
+        <button
+          class="tab"
+          [class.active]="activeTab === 'followers'"
+          (click)="setActiveTab('followers')"
+        >
+          Followers ({{ followerUsers.length }})
+        </button>
+        <button
+          class="tab"
+          [class.active]="activeTab === 'following'"
+          (click)="setActiveTab('following')"
+        >
+          Following ({{ followingUsers.length }})
+        </button>
+      </div>
+
+      <!-- My Connections -->
+      <div *ngIf="activeTab === 'my-connections'" class="tab-content">
+        <div *ngIf="myConnectionUsers.length === 0" class="empty-state">
+          No connections yet. Connect with other users!
+        </div>
+
+        <div *ngFor="let user of myConnectionUsers" class="connection-item">
+          <div class="user-avatar">{{ (user.name || 'U').charAt(0).toUpperCase() }}</div>
+          <div class="user-info">
+            <a [routerLink]="['/profile', user.id]" class="user-name">
+              {{ user.name }}
+            </a>
+            <p class="user-meta">{{ user.role }}</p>
+          </div>
+          <div class="connection-actions">
+            <button (click)="removeConnection(user.id)" class="btn btn-secondary btn-sm">
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pending Connections -->
+      <div *ngIf="activeTab === 'pending-connections'" class="tab-content">
+        <div *ngIf="pendingConnections.length === 0" class="empty-state">
+          No pending connection requests
+        </div>
+
+        <div *ngFor="let connection of pendingConnections" class="connection-item">
+          <div class="user-avatar">{{ (connection.senderName || 'U').charAt(0).toUpperCase() }}</div>
+          <div class="user-info">
+            <a [routerLink]="['/profile', connection.senderId]" class="user-name">
+              {{ connection.senderName || 'Unknown' }}
+            </a>
+            <p class="user-meta">Sent {{ connection.createdAt | date:'short' }}</p>
+          </div>
+          <div class="connection-actions">
+            <button (click)="acceptConnection(connection.id)" class="btn btn-success btn-sm">
+              Accept
+            </button>
+            <button (click)="rejectConnection(connection.id)" class="btn btn-secondary btn-sm">
+              Reject
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pending Follow Requests -->
+      <div *ngIf="activeTab === 'pending-follows'" class="tab-content">
+        <div *ngIf="pendingFollowRequests.length === 0" class="empty-state">
+          No pending follow requests
+        </div>
+
+        <div *ngFor="let request of pendingFollowRequests" class="connection-item">
+          <div class="user-avatar">{{ getFollowerName(request).charAt(0).toUpperCase() }}</div>
+          <div class="user-info">
+            <a [routerLink]="['/profile', request.followerId]" class="user-name">
+              {{ getFollowerName(request) }}
+            </a>
+            <p class="user-meta">Sent {{ request.createdAt | date:'short' }}</p>
+          </div>
+          <div class="connection-actions">
+            <button (click)="acceptFollowRequest(request.id)" class="btn btn-success btn-sm">
+              Accept
+            </button>
+            <button (click)="rejectFollowRequest(request.id)" class="btn btn-secondary btn-sm">
+              Reject
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Followers -->
+      <div *ngIf="activeTab === 'followers'" class="tab-content">
+        <div *ngIf="followerUsers.length === 0" class="empty-state">
+          No followers yet
+        </div>
+
+        <div *ngFor="let follower of followerUsers" class="connection-item">
+          <div class="user-avatar">{{ (follower.name || 'U').charAt(0).toUpperCase() }}</div>
+          <div class="user-info">
+            <a [routerLink]="['/profile', follower.id]" class="user-name">
+              {{ follower.name }}
+            </a>
+            <p class="user-meta">{{ follower.role }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Following -->
+      <div *ngIf="activeTab === 'following'" class="tab-content">
+        <div *ngIf="followingUsers.length === 0" class="empty-state">
+          Not following anyone yet
+        </div>
+
+        <div *ngFor="let user of followingUsers" class="connection-item">
+          <div class="user-avatar">{{ (user.name || 'U').charAt(0).toUpperCase() }}</div>
+          <div class="user-info">
+            <a [routerLink]="['/profile', user.id]" class="user-name">
+              {{ user.name }}
+            </a>
+            <p class="user-meta">{{ user.role }}</p>
+          </div>
+          <div class="connection-actions">
+            <button (click)="unfollowUser(user.id)" class="btn btn-secondary btn-sm">
+              Unfollow
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

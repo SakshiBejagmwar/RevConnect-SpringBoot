@@ -1,0 +1,242 @@
+<div class="profile-setup-container">
+  <div class="profile-setup-card">
+    <h1 class="setup-title">Complete Your Profile</h1>
+    <p class="setup-subtitle" *ngIf="userRole === 'CREATOR'">Set up your Creator profile</p>
+    <p class="setup-subtitle" *ngIf="userRole === 'BUSINESS'">Set up your Business profile</p>
+
+    <div class="alert alert-success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+
+    <div class="alert alert-error" *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Creator Profile Form -->
+    <form *ngIf="userRole === 'CREATOR'" (ngSubmit)="onSubmitCreator()" class="profile-form">
+      <div class="form-group">
+        <label>Creator Name *</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="creatorProfile.creatorName"
+          name="creatorName"
+          placeholder="Your creator/brand name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Category *</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="creatorProfile.category"
+          name="category"
+          placeholder="e.g., Content Creator, Artist, Influencer"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Detailed Bio *</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="creatorProfile.detailedBio"
+          name="detailedBio"
+          rows="4"
+          placeholder="Tell your audience about yourself..."
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Contact Information</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="creatorProfile.contactInfo"
+          name="contactInfo"
+          placeholder="Email, phone, etc."
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Website</label>
+        <input
+          type="url"
+          class="form-control"
+          [(ngModel)]="creatorProfile.website"
+          name="website"
+          placeholder="https://yourwebsite.com"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Social Media Links</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="creatorProfile.socialMediaLinks"
+          name="socialMediaLinks"
+          rows="3"
+          placeholder="Instagram: @username, Twitter: @username, YouTube: @channel"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>External Links (Partnerships/Endorsements)</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="creatorProfile.externalLinks"
+          name="externalLinks"
+          rows="3"
+          placeholder="Patreon, Ko-fi, or other partnership links"
+        ></textarea>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Save Profile</span>
+          <span *ngIf="isLoading">Saving...</span>
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="skipSetup()">
+          Skip for Now
+        </button>
+      </div>
+    </form>
+
+    <!-- Business Profile Form -->
+    <form *ngIf="userRole === 'BUSINESS'" (ngSubmit)="onSubmitBusiness()" class="profile-form">
+      <div class="form-group">
+        <label>Business Name *</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="businessProfile.businessName"
+          name="businessName"
+          placeholder="Your business name"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Industry *</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="businessProfile.industry"
+          name="industry"
+          placeholder="e.g., Technology, Retail, Healthcare"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Detailed Bio *</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="businessProfile.detailedBio"
+          name="detailedBio"
+          rows="4"
+          placeholder="Describe your business..."
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Contact Information</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="businessProfile.contactInfo"
+          name="contactInfo"
+          placeholder="Business email, phone"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Website</label>
+        <input
+          type="url"
+          class="form-control"
+          [(ngModel)]="businessProfile.website"
+          name="website"
+          placeholder="https://yourbusiness.com"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Social Media Links</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="businessProfile.socialMediaLinks"
+          name="socialMediaLinks"
+          rows="3"
+          placeholder="LinkedIn, Facebook, Twitter handles"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Business Address</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="businessProfile.businessAddress"
+          name="businessAddress"
+          rows="2"
+          placeholder="Street address, City, State, ZIP"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Business Hours</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="businessProfile.businessHours"
+          name="businessHours"
+          rows="3"
+          placeholder="Monday-Friday: 9:00 AM - 5:00 PM"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>External Links</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="businessProfile.externalLinks"
+          name="externalLinks"
+          rows="2"
+          placeholder="Partner portals, support links"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Products/Services Description</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="businessProfile.productsDescription"
+          name="productsDescription"
+          rows="3"
+          placeholder="Brief description of your products or services"
+        ></textarea>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+          <span *ngIf="!isLoading">Save Profile</span>
+          <span *ngIf="isLoading">Saving...</span>
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="skipSetup()">
+          Skip for Now
+        </button>
+      </div>
+    </form>
+
+    <!-- Regular User Message -->
+    <div *ngIf="userRole === 'USER'" class="regular-user-message">
+      <p>You're all set! Your basic profile is ready.</p>
+      <button class="btn btn-primary" (click)="skipSetup()">
+        Go to Feed
+      </button>
+    </div>
+  </div>
+</div>

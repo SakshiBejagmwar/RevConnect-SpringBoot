@@ -1,0 +1,478 @@
+.analytics-layout {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #050505;
+  margin-bottom: 20px;
+}
+
+.metrics-overview {
+  margin-bottom: 20px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.metric-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.metric-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.metric-value {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.metric-label {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.demographics-section {
+  margin-bottom: 20px;
+}
+
+.demographics-content {
+  padding: 20px;
+}
+
+.demographic-item {
+  margin-bottom: 20px;
+}
+
+.demographic-label {
+  margin-bottom: 8px;
+}
+
+.role-badge {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.role-badge.personal {
+  background-color: #e7f3ff;
+  color: #1877f2;
+}
+
+.role-badge.creator {
+  background-color: #fff3e0;
+  color: #f57c00;
+}
+
+.role-badge.business {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.demographic-bar {
+  height: 24px;
+  background-color: #f0f2f5;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.bar-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.bar-fill.personal {
+  background: linear-gradient(90deg, #1877f2 0%, #42a5f5 100%);
+}
+
+.bar-fill.creator {
+  background: linear-gradient(90deg, #f57c00 0%, #ff9800 100%);
+}
+
+.bar-fill.business {
+  background: linear-gradient(90deg, #2e7d32 0%, #4caf50 100%);
+}
+
+.demographic-value {
+  font-size: 14px;
+  color: #65676b;
+  font-weight: 600;
+}
+
+.post-analytics-section {
+  margin-bottom: 20px;
+}
+
+.post-selector {
+  padding: 20px;
+  border-bottom: 1px solid #e4e6eb;
+}
+
+.post-selector label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #050505;
+}
+
+.post-analytics-details {
+  padding: 20px;
+}
+
+.selected-post-preview {
+  background-color: #f0f2f5;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.selected-post-preview h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #050505;
+}
+
+.post-content {
+  margin: 10px 0;
+  color: #050505;
+  line-height: 1.5;
+}
+
+.post-date {
+  font-size: 12px;
+  color: #65676b;
+}
+
+.analytics-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.analytics-metric {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f0f2f5;
+  border-radius: 8px;
+}
+
+.analytics-metric .metric-icon {
+  font-size: 32px;
+}
+
+.analytics-metric .metric-info {
+  flex: 1;
+}
+
+.analytics-metric .metric-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #050505;
+}
+
+.analytics-metric .metric-label {
+  font-size: 12px;
+  color: #65676b;
+}
+
+.engagement-section {
+  background-color: #f0f2f5;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.engagement-section h3 {
+  margin: 0 0 15px 0;
+  font-size: 18px;
+  color: #050505;
+}
+
+.engagement-bar-container {
+  height: 32px;
+  background-color: white;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.engagement-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  transition: width 0.3s ease;
+}
+
+.engagement-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: #050505;
+  margin: 10px 0;
+}
+
+.engagement-description {
+  font-size: 13px;
+  color: #65676b;
+  margin: 0;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: #65676b;
+}
+
+/* ========================================
+   RESPONSIVE ANALYTICS
+   ======================================== */
+
+/* Mobile devices (320px - 480px) */
+@media (max-width: 480px) {
+  .analytics-layout {
+    max-width: 100%;
+    margin: 10px;
+    padding: 0 10px;
+  }
+
+  .page-title {
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .metrics-overview {
+    margin-bottom: 15px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 15px;
+  }
+
+  .metric-card {
+    padding: 15px;
+  }
+
+  .metric-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .metric-value {
+    font-size: 28px;
+    margin-bottom: 4px;
+  }
+
+  .metric-label {
+    font-size: 13px;
+  }
+
+  .demographics-section {
+    margin-bottom: 15px;
+  }
+
+  .demographics-content {
+    padding: 15px;
+  }
+
+  .demographic-item {
+    margin-bottom: 15px;
+  }
+
+  .demographic-label {
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+
+  .role-badge {
+    padding: 3px 10px;
+    font-size: 12px;
+  }
+
+  .demographic-bar {
+    height: 20px;
+    margin-bottom: 4px;
+  }
+
+  .demographic-value {
+    font-size: 13px;
+  }
+
+  .post-analytics-section {
+    margin-bottom: 15px;
+  }
+
+  .post-selector {
+    padding: 15px;
+  }
+
+  .post-selector label {
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .post-selector select {
+    font-size: 13px;
+  }
+
+  .post-analytics-details {
+    padding: 15px;
+  }
+
+  .selected-post-preview {
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+
+  .selected-post-preview h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+
+  .post-content {
+    font-size: 13px;
+    margin: 8px 0;
+  }
+
+  .post-date {
+    font-size: 11px;
+  }
+
+  .analytics-metrics {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .analytics-metric {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .analytics-metric .metric-icon {
+    font-size: 28px;
+  }
+
+  .analytics-metric .metric-value {
+    font-size: 20px;
+  }
+
+  .analytics-metric .metric-label {
+    font-size: 11px;
+  }
+
+  .engagement-section {
+    padding: 15px;
+  }
+
+  .engagement-section h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .engagement-bar-container {
+    height: 28px;
+    margin-bottom: 8px;
+  }
+
+  .engagement-value {
+    font-size: 20px;
+    margin: 8px 0;
+  }
+
+  .engagement-description {
+    font-size: 12px;
+  }
+
+  .empty-state {
+    padding: 40px 15px;
+    font-size: 14px;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .analytics-layout {
+    max-width: 100%;
+    margin: 15px;
+    padding: 0 15px;
+  }
+
+  .page-title {
+    font-size: 24px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+    padding: 18px;
+  }
+
+  .metric-card {
+    padding: 18px;
+  }
+
+  .metric-icon {
+    font-size: 30px;
+  }
+
+  .metric-value {
+    font-size: 30px;
+  }
+
+  .demographics-content {
+    padding: 18px;
+  }
+
+  .post-selector {
+    padding: 18px;
+  }
+
+  .post-analytics-details {
+    padding: 18px;
+  }
+
+  .analytics-metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+  }
+
+  .analytics-metric {
+    padding: 13px;
+  }
+
+  .engagement-section {
+    padding: 18px;
+  }
+}
+
+/* Desktop (769px and above) */
+@media (min-width: 769px) {
+  .analytics-layout {
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 0 20px;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

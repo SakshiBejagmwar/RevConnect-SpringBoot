@@ -1,0 +1,265 @@
+.connections-layout {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #e4e6eb;
+}
+
+.tab {
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  color: #65676b;
+  transition: all 0.2s;
+}
+
+.tab:hover {
+  color: #050505;
+}
+
+.tab.active {
+  color: #1877f2;
+  border-bottom-color: #1877f2;
+}
+
+.tab-content {
+  padding: 10px 0;
+}
+
+.connection-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #e4e6eb;
+  transition: background-color 0.2s;
+}
+
+.connection-item:hover {
+  background-color: #f0f2f5;
+}
+
+.connection-item:last-child {
+  border-bottom: none;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-weight: 600;
+  color: #050505;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.user-name:hover {
+  text-decoration: underline;
+}
+
+.user-meta {
+  font-size: 14px;
+  color: #65676b;
+  margin: 0;
+}
+
+.connection-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #65676b;
+  font-style: italic;
+}
+
+/* ========================================
+   RESPONSIVE CONNECTIONS
+   ======================================== */
+
+/* Mobile devices (320px - 480px) */
+@media (max-width: 480px) {
+  .connections-layout {
+    max-width: 100%;
+    margin: 10px;
+  }
+
+  .tabs {
+    gap: 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 15px;
+  }
+
+  .tab {
+    padding: 10px 12px;
+    font-size: 12px;
+    white-space: nowrap;
+    min-width: 100px;
+    flex-shrink: 0;
+  }
+
+  .tab-content {
+    padding: 8px 0;
+  }
+
+  .connection-item {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+    align-items: flex-start;
+  }
+
+  .user-avatar {
+    width: 45px;
+    height: 45px;
+    font-size: 18px;
+    align-self: center;
+  }
+
+  .user-info {
+    text-align: center;
+    width: 100%;
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+
+  .user-meta {
+    font-size: 13px;
+  }
+
+  .connection-actions {
+    width: 100%;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .connection-actions .btn {
+    width: 100%;
+    padding: 8px;
+    font-size: 13px;
+  }
+
+  .empty-state {
+    padding: 30px 15px;
+    font-size: 14px;
+  }
+}
+
+/* Tablets (481px - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .connections-layout {
+    max-width: 100%;
+    margin: 15px;
+  }
+
+  .tabs {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    padding: 11px 16px;
+    font-size: 13px;
+  }
+
+  .connection-item {
+    gap: 12px;
+    padding: 13px;
+  }
+
+  .user-avatar {
+    width: 48px;
+    height: 48px;
+    font-size: 19px;
+  }
+
+  .connection-actions {
+    gap: 6px;
+  }
+
+  .connection-actions .btn {
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+}
+
+/* Desktop (769px and above) */
+@media (min-width: 769px) {
+  .connections-layout {
+    max-width: 800px;
+    margin: 20px auto;
+  }
+
+  .tabs {
+    gap: 10px;
+  }
+
+  .tab {
+    padding: 12px 20px;
+  }
+
+  .connection-item {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .user-info {
+    text-align: left;
+  }
+
+  .connection-actions {
+    flex-direction: row;
+  }
+
+  .connection-actions .btn {
+    width: auto;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .tabs {
+    flex-direction: column;
+  }
+
+  .tab {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid #e4e6eb;
+    border-left: 3px solid transparent;
+  }
+
+  .tab.active {
+    border-bottom-color: #e4e6eb;
+    border-left-color: #1877f2;
+  }
+}
